@@ -3,20 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          value: null,
-        };
-    }
-
-    render() {
+   render() {
       return (
         <button
             className="square"
-            onClick={() => this.setState({value: 'X'})}
+            onClick={() => this.props.onClick()}
         >
-        {this.state.value}
+        {this.props.value}
         </button>
       );
     }
@@ -28,6 +21,13 @@ class Board extends React.Component {
         this.state = {
           squares: Array(9).fill(null),
         };
+    }
+
+    handleClick(i) {
+        // Use slice to make a local copy of the squares array
+        const arr = this.state.squares.slice();
+        arr[i] = 'X';
+        this.setState({squares: arr});
     }
 
     renderSquare(i) {
