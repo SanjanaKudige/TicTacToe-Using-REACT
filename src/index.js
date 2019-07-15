@@ -25,6 +25,10 @@ class Board extends React.Component {
     handleClick(i) {
         // Use slice to make a local copy of the squares array
         const arr = this.state.squares.slice();
+        if (calculateWinner(arr) || arr[i]) {
+            // If winner is already declared, don't allow the game to continue
+            return;
+        }
         arr[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState(
             {
